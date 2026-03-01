@@ -1,33 +1,36 @@
 /**
  * OOPSBannerApp
  *
- * UC6: Using Static Helper Methods for Character Patterns
+ * UC7: Store Character Pattern in a Class
  *
  * @author Amrit
  * @version 1.0
  */
 public class OOPSBannerApp {
 
-    public static void main(String[] args) {
+    // Static Inner Class
+    static class CharacterPatternMap {
 
-        String[] O = getO();
-        String[] P = getP();
-        String[] S = getS();
+        private char character;
+        private String[] pattern;
 
-        String[] banner = new String[7];
-
-        for (int i = 0; i < 7; i++) {
-            banner[i] = String.join(" ", O[i], O[i], P[i], S[i]);
+        public CharacterPatternMap(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
         }
 
-        for (String line : banner) {
-            System.out.println(line);
+        public char getCharacter() {
+            return character;
+        }
+
+        public String[] getPattern() {
+            return pattern;
         }
     }
 
-    // Static helper method for letter O
-    public static String[] getO() {
-        return new String[]{
+    public static void main(String[] args) {
+
+        CharacterPatternMap O = new CharacterPatternMap('O', new String[]{
                 " ******** ",
                 "*        *",
                 "*        *",
@@ -35,12 +38,9 @@ public class OOPSBannerApp {
                 "*        *",
                 "*        *",
                 " ******** "
-        };
-    }
+        });
 
-    // Static helper method for letter P
-    public static String[] getP() {
-        return new String[]{
+        CharacterPatternMap P = new CharacterPatternMap('P', new String[]{
                 "********  ",
                 "*       * ",
                 "*       * ",
@@ -48,12 +48,9 @@ public class OOPSBannerApp {
                 "*         ",
                 "*         ",
                 "*         "
-        };
-    }
+        });
 
-    // Static helper method for letter S
-    public static String[] getS() {
-        return new String[]{
+        CharacterPatternMap S = new CharacterPatternMap('S', new String[]{
                 " ******** ",
                 "*         ",
                 "*         ",
@@ -61,6 +58,19 @@ public class OOPSBannerApp {
                 "         *",
                 "         *",
                 " ******** "
-        };
+        });
+
+        CharacterPatternMap[] characters = {O, O, P, S};
+
+        for (int row = 0; row < 7; row++) {
+
+            StringBuilder line = new StringBuilder();
+
+            for (CharacterPatternMap c : characters) {
+                line.append(c.getPattern()[row]).append(" ");
+            }
+
+            System.out.println(line);
+        }
     }
 }
